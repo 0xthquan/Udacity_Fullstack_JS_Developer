@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import routes from './routes/api/routes';
 
 const app = express();
@@ -9,6 +9,11 @@ app.get('/', (req: Request, res: Response): void => {
 });
 
 app.use('/api', routes);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: string, req: Request, res: Response, next: NextFunction): void=> {
+    res.status(400).send(err)
+})
 
 app.listen(port, (): void => {
     console.log(`Server running on ${port}`);
