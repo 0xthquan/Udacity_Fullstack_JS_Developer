@@ -9,16 +9,16 @@ routes.get('/', (req: Request, res: Response): void => {
 
 routes.get('/image', async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const fileName = req.query['filename'] as unknown as string;
-        const width = req.query['width'] as unknown as string;
-        const height = req.query['height'] as unknown as string;
+        const fileName = (req.query['filename'] as unknown as string).trim();
+        const width = (req.query['width'] as unknown as string).trim();
+        const height = (req.query['height'] as unknown as string).trim();
 
         if (!fileName || !height || !width) {
             next('Missing request param filename, height or width.')
             return;
         }
 
-        if (isNaN(parseInt(height)) || isNaN(parseInt(width)) || parseInt(width) < 0 || parseInt(height) < 0) {
+        if (!isNumber(height) || !isNumber(width) || parseInt(width) <= 0 || parseInt(height) <= 0) {
             next('Invalid input for height or width')
             return;
         }
@@ -42,5 +42,12 @@ routes.get('/image', async (req: Request, res: Response, next: NextFunction): Pr
         next('Something went wrong')
     }
 });
+
+function isNumber(value?: string): boolean {
+    if (!value) {
+        return false
+    }
+    return !isNaN(Number(value))
+}
 
 export default routes;
