@@ -12,7 +12,7 @@ const show = async (req: Request, res: Response) => {
         res.status(200);
         res.json(orderProduct);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 };
@@ -27,7 +27,7 @@ const update = async (req:Request, res: Response) => {
         res.status(200);
         res.json(orderProduct);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 }
@@ -48,7 +48,7 @@ const addProduct = async (req:Request, res: Response) => {
         res.status(200);
         res.json(orderProduct);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 }
@@ -62,7 +62,7 @@ const deleteOrderProduct = async (req:Request, res: Response) => {
         res.status(200);
         res.json(orderProduct);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 }
@@ -70,7 +70,7 @@ const deleteOrderProduct = async (req:Request, res: Response) => {
 
 
 export const orderProductRouter: Router = Router()
-orderProductRouter.get('/:id', show)
+orderProductRouter.get('/:id', verifyAuthToken, show)
 orderProductRouter.put('/updateOrderProduct/:id', verifyAuthToken, update)
 orderProductRouter.post('/addProduct/order/:id', verifyAuthToken, addProduct)
 orderProductRouter.delete('/delete/order/:id', verifyAuthToken, deleteOrderProduct)

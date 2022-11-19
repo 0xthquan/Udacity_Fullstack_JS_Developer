@@ -20,7 +20,9 @@ describe('Order Product Handler', () => {
             password: '123qwe',
         });
         authToken = response.body.token;
-        const userReponse = await request.get('/api/users/all').set('Authorization', 'Bearer ' + authToken);
+        const userReponse = await request
+            .get('/api/users/all')
+            .set('Authorization', 'Bearer ' + authToken);
         userId = userReponse.body[0].id;
 
         const productRes = await request
@@ -57,7 +59,9 @@ describe('Order Product Handler', () => {
     });
 
     it('Test end point show order product by order id', async () => {
-        const response = await request.get(`/api/orderProducts/${orderId}`);
+        const response = await request
+            .get(`/api/orderProducts/${orderId}`)
+            .set('Authorization', 'Bearer ' + authToken);
         expect(response.status).toBe(200);
     });
 
@@ -76,7 +80,7 @@ describe('Order Product Handler', () => {
         const response = await request
             .delete(`/api/orderProducts/delete/order/${orderId}`)
             .send({
-                productId: productId
+                productId: productId,
             })
             .set('Authorization', 'Bearer ' + authToken);
         expect(response.status).toBe(200);

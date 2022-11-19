@@ -17,7 +17,7 @@ const create = async (req: Request, res: Response) => {
         res.status(200);
         res.json(product);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 };
@@ -29,7 +29,7 @@ const deleteOrder = async (req:Request, res: Response) => {
         res.status(200);
         res.json(order);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 }
@@ -42,7 +42,7 @@ const show = async (req:Request, res: Response) => {
         res.status(200);
         res.json(order);
     } catch (error) {
-        res.status(400);
+        res.status(500);
         res.json(error);
     }
 }

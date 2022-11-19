@@ -6,10 +6,12 @@
   "scripts": {
     "start": "nodemon --watch './**/*.ts' --exec 'ts-node' src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
-    "test": "export ENV=test && npx tsc && db-migrate --env test up && jasmine && db-migrate --env test reset",
     "tsc": "tsc",
     "build": "npx tsc",
-    "jasmine": "jasmine"
+    "jasmine": "jasmine",
+    "pretest": "npx tsc && db-migrate --env test up",
+    "test": "export ENV=test && jasmine",
+    "posttest": "db-migrate --env test reset"
   },
   "author": "Udacity",
   "license": "ISC",
