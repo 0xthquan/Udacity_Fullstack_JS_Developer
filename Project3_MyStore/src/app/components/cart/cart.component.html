@@ -22,10 +22,11 @@
                 min="1"
                 type="number"
                 #cart
-                (change)="changeQuantity(cart.value, cartProduct)"
+                (ngModelChange)="changeQuantity(cart.value, cartProduct)"
                 class="input-group"
                 aria-label="Default select example"
-                value="{{ cartProduct.amount }}"
+                [(ngModel)]="cartProduct.amount"
+                [ngModelOptions]="{ standalone: true }"
               />
             </div>
             <div class="cart-item-details">

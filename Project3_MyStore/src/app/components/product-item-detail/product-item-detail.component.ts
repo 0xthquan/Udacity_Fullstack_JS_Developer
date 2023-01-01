@@ -13,7 +13,6 @@ export class ProductItemDetailComponent implements OnInit {
   product!: Product;
   products!: Product[];
   id!: number;
-  amountOfItem = '1';
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +28,7 @@ export class ProductItemDetailComponent implements OnInit {
     this.productService.loadProducts().subscribe((data) => {
       this.products = data;
       this.product = this.getProductDetailBy(this.id);
+      this.product.amount = "1"
     });
   }
 
@@ -36,18 +36,13 @@ export class ProductItemDetailComponent implements OnInit {
     return this.products.filter((item) => item.id === id)[0];
   }
 
-  changeQuantity(value: any) {
-    this.amountOfItem = value;
-  }
-
   addProductToCart(product: Product): void {
     const cartProducts: Product[] = this.cartService.getCartProduct();
     let productInCart = cartProducts.find((item) => item.id === product.id);
     if (productInCart) {
-      productInCart.amount = this.amountOfItem;
+      productInCart.amount = this.product.amount;
       this.cartService.addProductToCart(cartProducts);
     } else {
-      product.amount = this.amountOfItem
       cartProducts.push(product);
       this.cartService.addProductToCart(cartProducts);
     }

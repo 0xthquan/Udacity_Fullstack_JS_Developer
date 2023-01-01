@@ -12,10 +12,6 @@ export class ProductItemComponent {
   amountOfItem = '1';
   constructor(private cartService: CartService) {}
 
-  changeQuantity(value: string) {
-    this.amountOfItem = value
-  }
-
   addProductToCart(product: Product): void {
     const cartProducts: Product[] = this.cartService.getCartProduct();
     let productInCart = cartProducts.find((item) => item.id === product.id);

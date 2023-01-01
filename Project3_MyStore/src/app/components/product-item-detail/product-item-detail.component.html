@@ -9,11 +9,11 @@
                   min="1"
                   type="number"
                   #cart
-                  (change)="changeQuantity(cart.value)"
                   style="width: 100px"
                   class="input-group"
                   aria-label="Default select example"
-                  value="{{ amountOfItem }}"
+                  [(ngModel)]="product.amount"
+                  [ngModelOptions]="{ standalone: true }"
                 />
             <input class="btn-add" type="submit" value="Add to Cart" class="mt-2 btn btn-primary" />
         </form>

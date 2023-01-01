@@ -1,18 +1,27 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label>Full Name: </label><br />
+    <label>Full Name</label><br />
     <input
       class="form-control"
       type="text"
-      name="firstName"
+      name="fullName"
       required
       minlength="3"
       placeholder="(minimum 3 characters)"
       [(ngModel)]="fullName"
+      #fullNameInput = "ngModel"
     />
+    <div *ngIf="fullNameInput?.invalid && fullNameInput?.dirty" class="error-message">
+      <div *ngIf="fullNameInput?.errors?.['required']">
+        Please provide your full name
+      </div>
+      <div *ngIf="fullNameInput?.errors?.['minlength']">
+        Full name must contain at least 3 characters.
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label>Address: </label><br />
+    <label>Address</label><br />
     <input
       class="form-control"
       type="text"
@@ -21,20 +30,37 @@
       minlength="6"
       placeholder="(minimum 6 characters)"
       [(ngModel)]="address"
+      #addressInput="ngModel"
     />
+    <div *ngIf="addressInput?.invalid && addressInput?.dirty" class="error-message">
+      <div *ngIf="addressInput?.errors?.['required']">
+        Please provide your address
+      </div>
+      <div *ngIf="addressInput?.errors?.['minlength']">
+        Address must contain at least 6 characters.
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label>Credit Card Number: </label><br />
+    <label>Credit Card Number</label><br />
     <input
       class="form-control"
-      type="text"
+      type="number"
       name="creditCard"
       required
-      minlength="16"
-      maxlength="16"
+      pattern=".{16}"
       placeholder="(16-digit number)"
       [(ngModel)]="creditCard"
+      #creditCardInput="ngModel"
     />
+    <div *ngIf="creditCardInput?.invalid && creditCardInput?.dirty" class="error-message">
+      <div *ngIf="creditCardInput?.errors?.['required']">
+        Please provide your credit card number for payment
+      </div>
+      <div *ngIf="creditCardInput?.errors?.['pattern']">
+        Credit card number must contain 16 numbers.
+      </div>
+    </div>
   </div>
   <input
     [disabled]="form.invalid"
