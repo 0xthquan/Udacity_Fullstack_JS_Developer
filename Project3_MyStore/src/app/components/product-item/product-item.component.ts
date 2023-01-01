@@ -9,23 +9,21 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class ProductItemComponent {
   @Input() productItem!: Product;
-  selectedItem = '1';
-  numberOfProduct: string[] = ['1', '2', '3', '4', '5'];
-
+  amountOfItem = '1';
   constructor(private cartService: CartService) {}
 
-  selectedChange(value: any) {
-    this.selectedItem = value;
+  changeQuantity(value: string) {
+    this.amountOfItem = value
   }
 
   addProductToCart(product: Product): void {
     const cartProducts: Product[] = this.cartService.getCartProduct();
     let productInCart = cartProducts.find((item) => item.id === product.id);
     if (productInCart) {
-      productInCart.amount = this.selectedItem;
+      productInCart.amount = this.amountOfItem;
       this.cartService.addProductToCart(cartProducts);
     } else {
-      product.amount = this.selectedItem
+      product.amount = this.amountOfItem
       cartProducts.push(product);
       this.cartService.addProductToCart(cartProducts);
     }

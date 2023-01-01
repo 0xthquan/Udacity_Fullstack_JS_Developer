@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { OrderInfo } from 'src/app/models/orderInfo.model';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/service/cart.service';
-import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +14,7 @@ export class CartComponent implements OnInit {
   @Output() userInfo = new EventEmitter();
 
   totalPrice: number = 0;
-  constructor(private productService: ProductService, private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartProducts = this.cartService.getCartProduct();

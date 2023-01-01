@@ -12,10 +12,8 @@ import { ProductService } from 'src/app/service/product.service';
 export class ProductItemDetailComponent implements OnInit {
   product!: Product;
   products!: Product[];
-  quantity: number = 1;
   id!: number;
-  productCount: string[] = ['1', '2', '3', '4', '5'];
-  selectedItem = '1';
+  amountOfItem = '1';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,18 +36,18 @@ export class ProductItemDetailComponent implements OnInit {
     return this.products.filter((item) => item.id === id)[0];
   }
 
-  selectedChange(value: any) {
-    this.selectedItem = value;
+  changeQuantity(value: any) {
+    this.amountOfItem = value;
   }
 
   addProductToCart(product: Product): void {
     const cartProducts: Product[] = this.cartService.getCartProduct();
     let productInCart = cartProducts.find((item) => item.id === product.id);
     if (productInCart) {
-      productInCart.amount = this.selectedItem;
+      productInCart.amount = this.amountOfItem;
       this.cartService.addProductToCart(cartProducts);
     } else {
-      product.amount = this.selectedItem
+      product.amount = this.amountOfItem
       cartProducts.push(product);
       this.cartService.addProductToCart(cartProducts);
     }

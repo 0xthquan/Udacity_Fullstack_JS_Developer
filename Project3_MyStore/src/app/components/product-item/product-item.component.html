@@ -1,6 +1,6 @@
 <div class="col mb-5">
     <div class="card h-100">
-        <a routerLink="product/{{ productItem.id }}" routerLinkActive="active">
+        <a href="product/{{ productItem.id }}" routerLinkActive="active">
             <img class="card-img-top" src="{{ productItem.url }}">
         </a>
         <div class="card-body p-4">
@@ -11,12 +11,17 @@
         </div>
         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <form (ngSubmit)="addProductToCart(productItem)" class="text-center">
-                <select [(ngModel)]="selectedItem" style="width: 100px" class="form-select mx-auto" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
-              <option *ngFor="let value of numberOfProduct" value="{{ value }}">
-                {{ value }}
-              </option>
-            </select>
-                <input class="btn-add" type="submit" value="Add to Cart" class="mt-2 btn btn-primary" />
+              <input
+                  min="1"
+                  type="number"
+                  #cart
+                  (change)="changeQuantity(cart.value)"
+                  style="width: 100px"
+                  class="input-group mx-auto row"
+                  aria-label="Default select example"
+                  value="{{ amountOfItem }}"
+                />
+                <input class="btn-add" type="submit" value="Add to Cart" class="mt-2 btn btn-primary row" />
             </form>
         </div>
     </div>

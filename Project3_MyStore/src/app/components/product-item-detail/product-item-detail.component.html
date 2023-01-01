@@ -1,15 +1,20 @@
-<div class="detail-container">
-    <img class="product-item__image" src="{{ product.url }}" />
-    <div class="detail-item">
+<div class="detail-container row">
+    <img class="col-auto" src="{{ product.url }}" />
+    <div class="detail-item col-auto">
         <h2>{{ product.name }}</h2>
         <p class="">{{ product.description }}</p>
         <p class="price">{{ product.price | currency: "USD" }}</p>
         <form (ngSubmit)="addProductToCart(product)">
-            <select [(ngModel)]="selectedItem" style="width: 100px" class="select-input form-select" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
-        <option *ngFor="let value of productCount" value="{{ value }}">
-          {{ value }}
-        </option>
-      </select>
+            <input
+                  min="1"
+                  type="number"
+                  #cart
+                  (change)="changeQuantity(cart.value)"
+                  style="width: 100px"
+                  class="input-group"
+                  aria-label="Default select example"
+                  value="{{ amountOfItem }}"
+                />
             <input class="btn-add" type="submit" value="Add to Cart" class="mt-2 btn btn-primary" />
         </form>
         <div>

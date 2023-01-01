@@ -7,7 +7,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { ProductItemDetailComponent } from './components/product-item-detail/product-item-detail.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/header/header.component';
+import { NavigationComponent } from './components/header/navigation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrderInfoComponent } from './components/order-info/order-info.component';
@@ -20,7 +20,7 @@ import { OrderSuccessComponent } from './components/order-success/order-success.
     ProductItemComponent,
     ProductItemDetailComponent,
     ProductListComponent,
-    HeaderComponent,
+    NavigationComponent,
     OrderInfoComponent,
     OrderSuccessComponent,
   ],
